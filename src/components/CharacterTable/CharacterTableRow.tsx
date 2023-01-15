@@ -14,7 +14,7 @@ export function CharacterTableRow({
 }: CharacterTableRowProps) {
     const dispatch = useAppDispatch();
     const [expanded, setExpanded] = useState(false);
-    const records = childrenData?.flat(0);
+    const hasChildren = !!childrenData?.flat(1).length;
 
     function deleteCharacter() {
         dispatch(remove(data.ID));
@@ -23,7 +23,7 @@ export function CharacterTableRow({
     return (
         <Fragment>
             <tr className='even:bg-white odd:bg-slate-100'>
-                {!!records?.length ? (
+                {hasChildren ? (
                     <td>
                         <IconChevronDown
                             onClick={() => setExpanded(!expanded)}
@@ -46,10 +46,10 @@ export function CharacterTableRow({
                 </td>
             </tr>
             {expanded &&
-                !!records?.length &&
+                hasChildren &&
                 // It's needed to map over the records array again in case both nemesis and secretes would exist
                 // Even though the mockup data ever only has one of them
-                records.map((record: any, index: number) => (
+                childrenData.map((record: any, index: number) => (
                     <tr key={index}>
                         <td colSpan={100}>
                             <CharacterTable inputData={record} />

@@ -20,8 +20,6 @@ export const charactersSlice = createSlice({
 });
 
 function searchCharacter(character: any, id: string) {
-    if (character === undefined) return;
-
     if (character.data.ID === id) {
         // remove character
         return;
@@ -41,8 +39,6 @@ function searchCharacter(character: any, id: string) {
                     key
                 ].records
                     .map((child: any) => {
-                        if (child === undefined) return;
-                        console.log('Searching child - ' + child.data.ID);
                         return searchCharacter(child, id);
                     })
                     .filter(Boolean); // Remove undefined values
