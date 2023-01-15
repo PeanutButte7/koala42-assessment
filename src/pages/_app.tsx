@@ -1,12 +1,13 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { MantineProvider } from '@mantine/core';
+import { store } from 'store';
+import { Provider } from 'react-redux';
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
-        <MantineProvider withGlobalStyles withNormalizeCSS>
+        <Provider store={store}>
             <Component {...pageProps} />
-        </MantineProvider>
+        </Provider>
     );
 }
 
